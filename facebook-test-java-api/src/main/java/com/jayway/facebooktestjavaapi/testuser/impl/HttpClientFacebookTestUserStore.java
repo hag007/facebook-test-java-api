@@ -16,10 +16,9 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +41,6 @@ public class HttpClientFacebookTestUserStore implements FacebookTestUserStore {
     private static final String ENCODING = "UTF-8";
 
     private String appAccessToken;
-    private JSONParser jsonParser;
     private final String applicationId;
     private final String applicationSecret;
     private final HttpClient client;
@@ -57,7 +55,6 @@ public class HttpClientFacebookTestUserStore implements FacebookTestUserStore {
     public HttpClientFacebookTestUserStore(String applicationId, String applicationSecret, HttpClient httpClient) {
         this.applicationId = applicationId;
         this.applicationSecret = applicationSecret;
-        this.jsonParser = new JSONParser();
         this.client = httpClient;
     }
 
@@ -244,8 +241,8 @@ public class HttpClientFacebookTestUserStore implements FacebookTestUserStore {
 
     private JSONObject parseJsonObject(String json) {
         try {
-            return (JSONObject) jsonParser.parse(json);
-        } catch (ParseException e) {
+            return new JSONObject(json);
+        } catch (JSONException e) {
             throw new IllegalArgumentException("Could not parse JSON: " + json);
         }
 

@@ -4,7 +4,7 @@ import com.jayway.facebooktestjavaapi.testuser.AccountSettingsChanger;
 import com.jayway.facebooktestjavaapi.testuser.FacebookTestUserAccount;
 import com.jayway.facebooktestjavaapi.testuser.FacebookTestUserStore;
 import org.apache.http.NameValuePair;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -143,7 +143,7 @@ public class HttpClientFacebookTestUserAccount implements FacebookTestUserAccoun
     }
 
     public String json() {
-        return jsonUser.toJSONString();
+        return jsonUser.toString();
     }
 
     private String userDataAsString(String data) {
